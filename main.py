@@ -1,5 +1,6 @@
 import pygame
 import time
+from random import randint
 
 black = (0,0,0)
 white = (255,255,255)
@@ -7,6 +8,9 @@ green = (0,255,0)
 
 surfaceWidth = 800
 surfaceHeight = 400
+
+imageHeight = 43
+imageWidth = 100
 
 pygame.init()
 surface = pygame.display.set_mode((surfaceWidth,surfaceHeight))
@@ -94,6 +98,15 @@ def main():
     y = 200
     y_move = 0
 
+    x_block = surfaceWidth
+    y_block = 0
+
+    block_width = 75
+    block_height = randint(0,surfaceHeight)
+    gap = imageHeight * 3
+    block_move = 3
+    
+
     game_over = False
 
     while not game_over:
@@ -118,6 +131,10 @@ def main():
 
         surface.fill(black)
         helicopter(x,y,img)
+        blocks(x_block,y_block,block_width,block_height,gap)
+        x_block -= block_move                       #moving the block
+        
+        
         
         if y > surfaceHeight-40 or y < 0:
             gameOver()
