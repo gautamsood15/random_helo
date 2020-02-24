@@ -3,6 +3,7 @@ import time
 
 black = (0,0,0)
 white = (255,255,255)
+green = (0,255,0)
 
 surfaceWidth = 800
 surfaceHeight = 400
@@ -20,6 +21,12 @@ img = pygame.image.load('Helicopter.png')
 
 
 
+
+
+
+def blocks(x_block, y_block, block_width, block_height, gap):
+    pygame.draw.rect(surface, green, [x_block,y_block,block_width,block_height])
+    pygame.draw.rect(surface, green, [x_block,y_block+block_height+gap,block_width,block_height])
 
 
 def replay_or_quit():
