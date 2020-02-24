@@ -10,12 +10,15 @@ clock = pygame.time.Clock()
 
 # Function area
 
-def helicopter(x,y,image):
-    surface.blit(image, (x,y))
-
 img = pygame.image.load('Helicopter.png')
 x = 150
 y = 200
+
+y_move = 0
+
+def helicopter(x,y,image):
+    surface.blit(image, (x,y))
+
 
 
 #game loop
@@ -29,11 +32,27 @@ while not game_over:
         if event.type == pygame.QUIT:
             game_over = True
 
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_UP:
+                y_move = -8  #pushing the helicopter upwards
+
+        if event.type == pygame.KEYUP:
+            if event.key == pygame.K_UP:
+                y_move = 3
+
+    y += y_move
+    
+                
+
+                
+
     surface.fill(black)
     helicopter(x,y,img)
 
-    pygame.display.update()
 
+
+
+    pygame.display.update()
     clock.tick(60)   #means this  game will be 60 frames per sec
 
 pygame.quit()
