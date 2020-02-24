@@ -3,8 +3,11 @@ import pygame
 black = (0,0,0)
 white = (255,255,255)
 
+surfaceWidth = 800
+surfaceHeight = 400
+
 pygame.init()
-surface = pygame.display.set_mode((800,400))
+surface = pygame.display.set_mode((surfaceWidth,surfaceHeight))
 pygame.display.set_caption('Helicopter')
 clock = pygame.time.Clock()
 
@@ -54,7 +57,7 @@ while not game_over:
     surface.fill(black)
     helicopter(x,y,img)
     
-    if y > 360 or y < 0:
+    if y > surfaceHeight-40 or y < 0:
         gameOver()
 
     pygame.display.update()
