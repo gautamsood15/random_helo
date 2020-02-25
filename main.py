@@ -136,12 +136,36 @@ def main():
         
         
         
-        if y > surfaceHeight-40 or y < 0:
+        if y > surfaceHeight-40 or y < 0:  #if helicopter flies out of the surface
             gameOver()
 
         if x_block < (-1*block_width):   #if block is removed form screne introduce another block
             x_block = surfaceWidth
             block_height = randint(0,(surfaceHeight/2))
+
+        #CRASH LOGIC UPPER BLOCK
+
+        if x + imageWidth > x_block:     #check if the x coordinate the crossing
+            if x < x_block + block_width:  #chick if we are still in/before the blocks or passed it
+                print('possibly within the boundaries of x upper')
+                if y < block_height:      # if its within the boundaries of y
+                    print('y crossover UPPER!')
+                    if x - imageWidth < block_width + x_block:  #if were within the block
+                        print('game over hit upper')
+                        gameOver()
+                
+        #CRASH LOGIC LOWER BLOCK
+
+        if x + imageWidth > x_block:    #check if the x coordinate the crossing 
+            print('x crossover')
+
+            if y + imageHeight > block_height+gap:
+                print('Possible y crossover LOWER!')
+
+                if x < block_width + x_block:
+                    print('game over hit lower')
+                    gameOver()
+            
 
         pygame.display.update()
         clock.tick(60)   #means this  game will be 60 frames per sec
