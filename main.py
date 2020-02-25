@@ -1,10 +1,27 @@
 import pygame
 import time
-from random import randint
+from random import randint,randrange
 
 black = (0,0,0)
 white = (255,255,255)
-green = (0,255,100)
+green = (200,255,200)
+
+
+sunset = (253,72,47)
+greenyellow = (47,255,0)
+brightblue = (47,228,253)
+orange = (255,113,0)
+yellow = (255,236,0)
+purple = (252,67,255)
+
+
+
+colorChoices = [greenyellow,brightblue,orange,yellow,purple]
+
+
+
+
+
 
 surfaceWidth = 800
 surfaceHeight = 500
@@ -38,9 +55,9 @@ def score(count):
 
 
 
-def blocks(x_block, y_block, block_width, block_height, gap):
-    pygame.draw.rect(surface, green, [x_block,y_block,block_width,block_height])
-    pygame.draw.rect(surface, green, [x_block,y_block+block_height+gap,block_width,surfaceHeight])
+def blocks(x_block, y_block, block_width, block_height, gap, colorChoice):
+    pygame.draw.rect(surface, colorChoice, [x_block,y_block,block_width,block_height])
+    pygame.draw.rect(surface, colorChoice, [x_block,y_block+block_height+gap,block_width,surfaceHeight])
 
 
 def replay_or_quit():
@@ -58,7 +75,7 @@ def replay_or_quit():
 
 
 def makeTextObjs(text, font):
-    textSurface = font.render(text, True, white)
+    textSurface = font.render(text, True, sunset)
     return textSurface, textSurface.get_rect()
 
 
@@ -117,6 +134,8 @@ def main():
     block_move = 3
 
     current_score = 0
+
+    blockColor = colorChoices[randrange(0, len(colorChoices))]
     
 
     game_over = False
@@ -144,7 +163,7 @@ def main():
         surface.fill(black)
         helicopter(x,y,img)
 
-        blocks(x_block,y_block,block_width,block_height,gap)
+        blocks(x_block,y_block,block_width,block_height,gap,blockColor)
         x_block -= block_move                       #moving the block
         
 
@@ -160,6 +179,7 @@ def main():
         if x_block < (-1*block_width):   #if block is removed form screne introduce another block
             x_block = surfaceWidth
             block_height = randint(0,(surfaceHeight/2))
+            blockColor = colorChoices[randrange(0, len(colorChoices))]
 
         #CRASH LOGIC UPPER BLOCK
 
