@@ -140,6 +140,9 @@ def main():
 
     game_over = False
 
+
+# BEGINNING GAME LOOP
+
     while not game_over:
         
         for event in pygame.event.get():
@@ -208,10 +211,22 @@ def main():
 
         #LOGIC TO CALC SCORE
 
-        if x < x_block and x > x_block - block_move:          #if the tail of helicopter has passed the block
+        if x_block < (x - block_width) < x_block + block_move:          #if the tail of helicopter has passed the block
             current_score += 1
 
-        
+        if 3 <= current_score < 5:
+            block_move = 6
+            gap = imageHeight * 2.6
+
+        if 5 <= current_score < 8:
+            block_move = 8
+            gap = imageHeight * 2.5
+            
+
+        if 8 <= current_score < 14:
+            block_move = 7
+            gap = imageHeight * 2.4
+            
 
         pygame.display.update()  
         clock.tick(60)   #means this  game will be 60 frames per sec
