@@ -4,7 +4,7 @@ from random import randint
 
 black = (0,0,0)
 white = (255,255,255)
-green = (0,255,0)
+green = (0,255,100)
 
 surfaceWidth = 800
 surfaceHeight = 500
@@ -23,6 +23,16 @@ img = pygame.image.load('Helicopter.png')
 
 # Function area
 
+
+
+
+
+
+
+def score(count):
+    font = pygame.font.Font('freesansbold.ttf', 20)
+    text = font.render("Score: "+str(count), True, white)
+    surface.blit(text, [0,0])
 
 
 
@@ -105,6 +115,8 @@ def main():
     block_height = randint(0,(surfaceHeight/2))
     gap = imageHeight * 3
     block_move = 3
+
+    current_score = 0
     
 
     game_over = False
@@ -131,9 +143,15 @@ def main():
 
         surface.fill(black)
         helicopter(x,y,img)
+
         blocks(x_block,y_block,block_width,block_height,gap)
         x_block -= block_move                       #moving the block
         
+
+        
+        score(current_score)
+
+
         
         
         if y > surfaceHeight-40 or y < 0:  #if helicopter flies out of the surface
@@ -147,27 +165,35 @@ def main():
 
         if x + imageWidth > x_block:     #check if the x coordinate the crossing
             if x < x_block + block_width:  #chick if we are still in/before the blocks or passed it
-                print('possibly within the boundaries of x upper')
+               # print('possibly within the boundaries of x upper')
                 if y < block_height:      # if its within the boundaries of y
-                    print('y crossover UPPER!')
+                #    print('y crossover UPPER!')
                     if x - imageWidth < block_width + x_block:  #if were within the block
-                        print('game over hit upper')
+                 #       print('game over hit upper')
                         gameOver()
                 
         #CRASH LOGIC LOWER BLOCK
 
         if x + imageWidth > x_block:    #check if the x coordinate the crossing 
-            print('x crossover')
+        #    print('x crossover')
 
             if y + imageHeight > block_height+gap:
-                print('Possible y crossover LOWER!')
+         #       print('Possible y crossover LOWER!')
 
                 if x < block_width + x_block:
-                    print('game over hit lower')
+          #          print('game over hit lower')
                     gameOver()
-            
 
-        pygame.display.update()
+
+
+        #LOGIC TO CALC SCORE
+
+        if x < x_block and x > x_block - block_move:          #if the tail of helicopter has passed the block
+            current_score += 1
+
+        
+
+        pygame.display.update()  
         clock.tick(60)   #means this  game will be 60 frames per sec
 
 
