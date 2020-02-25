@@ -132,6 +132,7 @@ def main():
     block_height = randint(0,(surfaceHeight/2))
     gap = imageHeight * 3
     block_move = 3
+    
 
     current_score = 0
 
@@ -183,6 +184,7 @@ def main():
             x_block = surfaceWidth
             block_height = randint(0,(surfaceHeight/2))
             blockColor = colorChoices[randrange(0, len(colorChoices))]
+            current_score += 1
 
         #CRASH LOGIC UPPER BLOCK
 
@@ -211,8 +213,8 @@ def main():
 
         #LOGIC TO CALC SCORE
 
-        if x_block < (x - block_width) < x_block + block_move:          #if the tail of helicopter has passed the block
-            current_score += 1
+       # if x_block < (x - block_width) < x_block + block_move + block_move-1:          #if the tail of helicopter has passed the block
+       #     current_score += 1
 
         if 3 <= current_score < 5:
             block_move = 6
